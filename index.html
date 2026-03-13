@@ -16,10 +16,40 @@
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Bebas Neue',sans-serif}
 body{background:#020206;position:relative}
 
+/* ═══════════════════════════════════════════════ */
+/*  ENTRY GATE — Consent Screen                   */
+/* ═══════════════════════════════════════════════ */
+.entry-gate{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 60%,#0a0a18 0%,#020206 70%);transition:opacity 1s ease,visibility 1s ease}
+.entry-gate.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+.gate-bat{width:100px;height:50px;fill:rgba(245,197,24,.5);margin-bottom:32px;
+  filter:drop-shadow(0 0 20px rgba(245,197,24,.3));animation:gate-glow 3s ease-in-out infinite}
+@keyframes gate-glow{0%,100%{filter:drop-shadow(0 0 20px rgba(245,197,24,.3));opacity:.7}50%{filter:drop-shadow(0 0 45px rgba(245,197,24,.6));opacity:1}}
+
+.gate-title{font-size:clamp(28px,6vw,52px);letter-spacing:10px;color:var(--gold);text-shadow:0 0 40px rgba(245,197,24,.3);margin-bottom:6px}
+.gate-sub{font-family:'Crimson Pro',serif;font-style:italic;font-size:clamp(13px,2vw,17px);color:rgba(220,210,195,.55);letter-spacing:2px;margin-bottom:44px}
+
+.gate-btns{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.gate-btn{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,1.8vw,17px);letter-spacing:4px;
+  padding:14px 34px;border:1px solid rgba(245,197,24,.25);background:rgba(245,197,24,.06);color:var(--gold);
+  cursor:pointer;transition:all .4s;border-radius:2px;display:flex;align-items:center;gap:10px}
+.gate-btn:hover{background:rgba(245,197,24,.15);border-color:rgba(245,197,24,.6);box-shadow:0 0 30px rgba(245,197,24,.15)}
+.gate-btn svg{width:18px;height:18px;fill:var(--gold);opacity:.7}
+.gate-btn:hover svg{opacity:1}
+.gate-skip{border-color:rgba(150,150,180,.15);background:rgba(150,150,180,.04);color:rgba(220,210,195,.6)}
+.gate-skip:hover{border-color:rgba(220,210,195,.3);background:rgba(150,150,180,.08);color:rgba(220,210,195,.9)}
+.gate-skip svg{fill:rgba(220,210,195,.5)}
+.gate-skip:hover svg{fill:rgba(220,210,195,.8)}
+
 /* ── Video Background ── */
-.bg-video{position:fixed;inset:0;z-index:0;overflow:hidden}
-.bg-video video{width:100%;height:100%;object-fit:cover;opacity:.45}
-.bg-video::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,2,6,.6) 0%,rgba(8,8,20,.4) 40%,rgba(8,8,20,.5) 70%,rgba(2,2,6,.7) 100%);pointer-events:none}
+.bg-video{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg-video video{width:100%;height:100%;object-fit:cover;opacity:.45;pointer-events:none}
+.bg-video video::-webkit-media-controls{display:none!important}
+.bg-video video::-webkit-media-controls-panel{display:none!important}
+.bg-video video::-webkit-media-controls-play-button{display:none!important}
+.bg-video video::-webkit-media-controls-start-playback-button{display:none!important}
+.bg-video::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,2,6,.6) 0%,rgba(8,8,20,.4) 40%,rgba(8,8,20,.5) 70%,rgba(2,2,6,.7) 100%)}
 
 /* ── Stars ── */
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--del,0s)}
@@ -64,6 +94,12 @@ body{background:#020206;position:relative}
 .building:hover{box-shadow:0 -120px 80px -60px rgba(245,197,24,.08),0 0 50px rgba(245,197,24,.12);filter:brightness(1.3)}
 .building::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(245,197,24,.06);transition:background .4s}
 .building:hover::before{background:rgba(245,197,24,.4)}
+
+/* ── Building Logo ── */
+.bld-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;
+  opacity:.2;transition:opacity .5s,filter .5s,transform .5s}
+.bld-logo svg{display:block}
+.building:hover .bld-logo{opacity:.85;filter:drop-shadow(0 0 10px rgba(245,197,24,.4));transform:translate(-50%,-50%) scale(1.1)}
 
 /* ── Label ── */
 .building .lbl{position:absolute;top:-48px;left:50%;transform:translateX(-50%) translateY(8px);white-space:nowrap;text-align:center;
@@ -141,6 +177,17 @@ body{background:#020206;position:relative}
 .footer-q{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;
   color:rgba(220,210,195,.4);z-index:25;white-space:nowrap;text-transform:uppercase}
 
+/* ── Sound Toggle ── */
+.sound-btn{position:fixed;bottom:20px;right:20px;z-index:30;width:44px;height:44px;border-radius:50%;
+  background:rgba(10,10,20,.7);border:1px solid rgba(245,197,24,.25);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.sound-btn:hover{border-color:rgba(245,197,24,.6);box-shadow:0 0 20px rgba(245,197,24,.15)}
+.sound-btn svg{width:20px;height:20px;fill:var(--gold);opacity:.7;transition:opacity .3s}
+.sound-btn:hover svg{opacity:1}
+.sound-btn.active{border-color:rgba(245,197,24,.5)}
+.sound-btn.active svg{opacity:1}
+
 /* ── Batman Silhouette ── */
 .batman{position:absolute;bottom:28px;left:1%;z-index:4;opacity:.12;pointer-events:none}
 
@@ -154,20 +201,44 @@ body{background:#020206;position:relative}
   .lbl-name{font-size:11px;letter-spacing:2px}
   .lbl-sub{font-size:8px}
   .b-wayne{width:55px}.b-archives{width:48px}.b-tech{width:50px}.b-signal{width:40px}.b-broadcast{width:50px}
+  .bld-logo svg{transform:scale(.7)}
   .deco{display:none}
   .hint{display:none}
   .batman{display:none}
+  .gate-title{letter-spacing:6px}
+  .gate-btns{gap:12px}
+  .gate-btn{padding:12px 24px;font-size:13px;letter-spacing:3px}
 }
 @media(max-width:480px){
   .b-wayne{left:45%}.b-archives{left:25%}.b-tech{left:60%}.b-signal{left:8%}.b-broadcast{left:78%}
+  .bld-logo svg{transform:scale(.55)}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ ENTRY GATE ═══ -->
+<div class="entry-gate" id="entry-gate">
+  <svg class="gate-bat" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/>
+  </svg>
+  <h1 class="gate-title">ENTER GOTHAM</h1>
+  <p class="gate-sub">The night awaits, traveller.</p>
+  <div class="gate-btns">
+    <button class="gate-btn" id="enter-sound" aria-label="Enter with sound">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      ENTER WITH SOUND
+    </button>
+    <button class="gate-btn gate-skip" id="enter-silent" aria-label="Enter silent">
+      <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+      ENTER SILENT
+    </button>
+  </div>
+</div>
+
 <!-- Video Background -->
 <div class="bg-video">
-  <video id="bg-vid" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture>
+  <video id="bg-vid" muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture>
     <source src="bg.mp4" type="video/mp4">
   </video>
 </div>
@@ -214,30 +285,63 @@ body{background:#020206;position:relative}
   <!-- Batman Silhouette (Easter Egg) -->
   <svg class="batman" width="40" height="70" viewBox="0 0 40 70"><path fill="#0a0a14" d="M20,0 C18,0 16,2 15,5 L13,4 L14,8 C12,12 11,16 11,20 L11,42 C8,44 5,47 5,50 L5,55 C5,58 3,62 0,65 L0,70 L15,70 L15,60 C15,58 17,56 20,56 C23,56 25,58 25,60 L25,70 L40,70 L40,65 C37,62 35,58 35,55 L35,50 C35,47 32,44 29,42 L29,20 C29,16 28,12 26,8 L27,4 L25,5 C24,2 22,0 20,0 Z"/></svg>
 
-  <!-- Interactive Buildings -->
+  <!-- ═══ Interactive Buildings with LOGOS ═══ -->
+
+  <!-- Signal Tower — Discord -->
   <a class="building b-signal" href="https://discord.com/users/758565587357794335" target="_blank" aria-label="Discord">
     <div class="win"></div>
+    <div class="bld-logo">
+      <svg width="28" height="22" viewBox="0 0 24 24" fill="rgba(245,197,24,.6)">
+        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+      </svg>
+    </div>
     <div class="lbl"><span class="lbl-name">SIGNAL TOWER</span><span class="lbl-sub">Discord · Join the Batcave</span></div>
   </a>
 
+  <!-- Gotham Archives — Letterboxd -->
   <a class="building b-archives" href="https://boxd.it/jvNsR" target="_blank" aria-label="Letterboxd">
     <div class="win"></div>
+    <div class="bld-logo">
+      <svg width="30" height="16" viewBox="0 0 500 250" fill="none">
+        <circle cx="125" cy="125" r="110" fill="rgba(245,197,24,.5)"/>
+        <circle cx="250" cy="125" r="110" fill="rgba(245,197,24,.35)"/>
+        <circle cx="375" cy="125" r="110" fill="rgba(245,197,24,.5)"/>
+      </svg>
+    </div>
     <div class="lbl"><span class="lbl-name">GOTHAM ARCHIVES</span><span class="lbl-sub">Letterboxd · Film logs</span></div>
   </a>
 
+  <!-- Wayne Tower — Spotify -->
   <a class="building b-wayne" href="https://open.spotify.com/user/31pwig3d7sq7i6fi5hl62uhj3xve?si=blnW1mQdQeeVnBsEPJ-AWQ&pi=vyG0zePOQCits" target="_blank" aria-label="Spotify">
     <div class="spire"></div>
     <div class="win"></div>
+    <div class="bld-logo">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="rgba(245,197,24,.6)">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+    </div>
     <div class="lbl"><span class="lbl-name">WAYNE TOWER</span><span class="lbl-sub">Spotify · Vibes &amp; Anthems</span></div>
   </a>
 
+  <!-- Tech Tower — GitHub -->
   <a class="building b-tech" href="https://github.com/kishankool/" target="_blank" aria-label="GitHub">
     <div class="win"></div>
+    <div class="bld-logo">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="rgba(245,197,24,.6)">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+      </svg>
+    </div>
     <div class="lbl"><span class="lbl-name">TECH TOWER</span><span class="lbl-sub">GitHub · Code from the Batcave</span></div>
   </a>
 
+  <!-- GCPD Broadcast — Twitter/X -->
   <a class="building b-broadcast" href="https://x.com/kishanmishra389" target="_blank" aria-label="Twitter / X">
     <div class="win"></div>
+    <div class="bld-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="rgba(245,197,24,.6)">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    </div>
     <div class="lbl"><span class="lbl-name">GCPD BROADCAST</span><span class="lbl-sub">Twitter · Gotham's rooftops</span></div>
   </a>
 
@@ -263,6 +367,13 @@ body{background:#020206;position:relative}
 <!-- Footer -->
 <p class="footer-q">I am vengeance. I am the night.</p>
 
+<!-- Sound Toggle -->
+<button class="sound-btn" id="sound-btn" aria-label="Toggle sound">
+  <svg viewBox="0 0 24 24" id="sound-icon">
+    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+  </svg>
+</button>
+
 <script>
 // ── Stars ──
 const sc=document.getElementById('sc');
@@ -273,7 +384,6 @@ sc.appendChild(s)}
 
 // ── Flying Bats ──
 const bc=document.getElementById('bc');
-const batSVG='<svg viewBox="0 0 200 100"><path d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/></svg>';
 function spawnBat(){
   const b=document.createElement('div');b.className='fbat';
   const sz=Math.random()*14+8,y=Math.random()*35+5,dur=Math.random()*7+5,left=Math.random()>.5;
@@ -290,15 +400,129 @@ setInterval(spawnBat,4000);setTimeout(spawnBat,600);setTimeout(spawnBat,2000);se
 // ── Hint auto-hide ──
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0'},4000);
 
-// ── Force video play on mobile ──
-const vid=document.getElementById('bg-vid');
-function tryPlay(){if(vid&&vid.paused){vid.muted=true;vid.play().catch(()=>{});}}
-tryPlay();
-document.addEventListener('touchstart',tryPlay,{once:true});
-document.addEventListener('scroll',tryPlay,{once:true});
-document.addEventListener('click',tryPlay,{once:true});
-setTimeout(tryPlay,500);
-setTimeout(tryPlay,2000);
+// ═══════════════════════════════════════════════
+//  ENTRY GATE — Consent Logic
+// ═══════════════════════════════════════════════
+const gate = document.getElementById('entry-gate');
+const vid = document.getElementById('bg-vid');
+const soundBtn = document.getElementById('sound-btn');
+const soundIcon = document.getElementById('sound-icon');
+let audioCtx, isPlaying = false;
+
+// Ambient sound generator (procedural — no external files)
+function createAmbientSound() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Must resume on user gesture (mobile requirement)
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  const master = audioCtx.createGain();
+  master.gain.value = 0.45;
+  master.connect(audioCtx.destination);
+
+  // Rain noise (louder, richer)
+  const bufSize = audioCtx.sampleRate * 2;
+  const buf = audioCtx.createBuffer(2, bufSize, audioCtx.sampleRate);
+  for (let ch = 0; ch < 2; ch++) {
+    const data = buf.getChannelData(ch);
+    for (let i = 0; i < bufSize; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+  }
+  const noise = audioCtx.createBufferSource();
+  noise.buffer = buf; noise.loop = true;
+  const lp = audioCtx.createBiquadFilter();
+  lp.type = 'lowpass'; lp.frequency.value = 900;
+  const rainGain = audioCtx.createGain();
+  rainGain.gain.value = 0.6;
+  noise.connect(lp); lp.connect(rainGain); rainGain.connect(master); noise.start();
+
+  // City hum (deeper, subtle)
+  const osc = audioCtx.createOscillator();
+  osc.type = 'sine'; osc.frequency.value = 55;
+  const humGain = audioCtx.createGain();
+  humGain.gain.value = 0.08;
+  osc.connect(humGain); humGain.connect(master); osc.start();
+
+  // Second hum harmonic
+  const osc2 = audioCtx.createOscillator();
+  osc2.type = 'sine'; osc2.frequency.value = 110;
+  const hum2Gain = audioCtx.createGain();
+  hum2Gain.gain.value = 0.03;
+  osc2.connect(hum2Gain); hum2Gain.connect(master); osc2.start();
+
+  // Wind (stereo, wider)
+  const windBuf = audioCtx.createBuffer(2, bufSize, audioCtx.sampleRate);
+  for (let ch = 0; ch < 2; ch++) {
+    const windData = windBuf.getChannelData(ch);
+    for (let i = 0; i < bufSize; i++) windData[i] = (Math.random() * 2 - 1) * 0.25;
+  }
+  const wind = audioCtx.createBufferSource();
+  wind.buffer = windBuf; wind.loop = true;
+  const bp = audioCtx.createBiquadFilter();
+  bp.type = 'bandpass'; bp.frequency.value = 220; bp.Q.value = 0.3;
+  const windGain = audioCtx.createGain();
+  windGain.gain.value = 0.5;
+  wind.connect(bp); bp.connect(windGain); windGain.connect(master); wind.start();
+
+  // Thunder-like low rumble
+  const rumbleBuf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+  const rumbleData = rumbleBuf.getChannelData(0);
+  for (let i = 0; i < bufSize; i++) rumbleData[i] = (Math.random() * 2 - 1) * 0.2;
+  const rumble = audioCtx.createBufferSource();
+  rumble.buffer = rumbleBuf; rumble.loop = true;
+  const rlp = audioCtx.createBiquadFilter();
+  rlp.type = 'lowpass'; rlp.frequency.value = 120;
+  const rumGain = audioCtx.createGain();
+  rumGain.gain.value = 0.3;
+  rumble.connect(rlp); rlp.connect(rumGain); rumGain.connect(master); rumble.start();
+
+  console.log('🔊 Audio started, state:', audioCtx.state);
+  return master;
+}
+
+function enterGotham(withSound) {
+  // Dismiss the gate
+  gate.classList.add('hidden');
+
+  // Start video (user gesture = allowed)
+  if (vid) {
+    vid.muted = true;
+    vid.play().catch(() => {});
+  }
+
+  // Start sound if requested
+  if (withSound) {
+    try {
+      createAmbientSound();
+      isPlaying = true;
+      soundBtn.classList.add('active');
+      soundIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+    } catch (e) { console.warn('Audio failed:', e); }
+  }
+}
+
+document.getElementById('enter-sound').addEventListener('click', () => enterGotham(true));
+document.getElementById('enter-silent').addEventListener('click', () => enterGotham(false));
+
+// Sound toggle button (works after entry)
+soundBtn.addEventListener('click', () => {
+  if (!audioCtx) {
+    try {
+      createAmbientSound();
+      isPlaying = true;
+      soundBtn.classList.add('active');
+      soundIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+    } catch (e) { console.warn('Audio failed:', e); }
+  } else if (isPlaying) {
+    audioCtx.suspend();
+    isPlaying = false;
+    soundBtn.classList.remove('active');
+    soundIcon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+  } else {
+    audioCtx.resume();
+    isPlaying = true;
+    soundBtn.classList.add('active');
+    soundIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+  }
+});
 </script>
 </body>
 </html>
