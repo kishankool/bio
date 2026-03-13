@@ -3,419 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kishan Mishra</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23050508'/%3E%3Cpath fill='%23f5c518' d='M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z'/%3E%3C/svg%3E">
+<title>Kishan Mishra | Gotham</title>
+<meta name="description" content="Kishan Mishra — Vibe coder, Gamer, Music & Cinema enthusiast. Explore the Gotham skyline.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23050508'/%3E%3Cpath fill='%23f5c518' d='M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#f5c518;--gold-dim:#c9a010;--bld:#080810;--bld-deco:#060610;
+  --sky1:#020206;--sky2:#080814;--sky3:#101024;
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Bebas Neue',sans-serif}
+body{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 45%,var(--sky3) 80%,#161630 100%);position:relative}
 
-  :root {
-    --gold: #f5c518;
-    --gold-dim: #c9a010;
-    --black: #050508;
-    --dark: #0a0a0f;
-    --panel: #0f0f16;
-    --border: rgba(245,197,24,0.2);
-    --text: #e8e0cc;
-    --text-dim: rgba(232,224,204,0.5);
-  }
+/* ── Stars ── */
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--del,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--o,.2)}50%{opacity:.9}}
 
-  html, body {
-    min-height: 100%;
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Crimson Pro', Georgia, serif;
-    overflow-x: hidden;
-  }
+/* ── Moon ── */
+.moon{position:absolute;top:7%;right:12%;width:50px;height:50px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#f0e8c8,#c8b070);
+  box-shadow:0 0 40px rgba(240,232,200,.35),0 0 120px rgba(240,232,200,.12);z-index:1}
 
-  /* Animated rain/city bg */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245,197,24,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 80% 60% at 20% 100%, rgba(245,197,24,0.04) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ── Bat Signal ── */
+.bat-signal{position:absolute;top:8%;left:50%;transform:translateX(-50%);z-index:2;
+  width:130px;height:130px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle,rgba(245,197,24,.12) 0%,transparent 70%);
+  animation:sig-pulse 4s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(245,197,24,.25))}
+.bat-signal svg{width:68px;fill:rgba(245,197,24,.45);animation:sig-rot 25s linear infinite}
+@keyframes sig-pulse{0%,100%{filter:drop-shadow(0 0 25px rgba(245,197,24,.25));opacity:.65}50%{filter:drop-shadow(0 0 55px rgba(245,197,24,.55));opacity:1}}
+@keyframes sig-rot{to{transform:rotate(360deg)}}
 
-  /* Grid lines — Gotham city effect */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* ── Profile ── */
+.profile{position:absolute;top:30%;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none;width:90%}
+.profile h1{font-size:clamp(30px,6vw,56px);letter-spacing:8px;color:var(--gold);text-shadow:0 0 40px rgba(245,197,24,.35);line-height:1;margin-bottom:6px}
+.profile .tag{font-size:clamp(10px,1.5vw,13px);letter-spacing:5px;color:rgba(245,197,24,.45)}
+.profile .bio{font-family:'Crimson Pro',serif;font-style:italic;font-size:clamp(11px,1.3vw,14px);color:rgba(200,190,170,.35);margin-top:10px;letter-spacing:1px}
 
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 48px 20px 64px;
-  }
+/* ── Skyline Container ── */
+.skyline{position:absolute;bottom:0;left:0;right:0;height:55%;z-index:5}
 
-  /* Batman logo SVG at top */
-  .bat-logo {
-    width: 80px;
-    margin-bottom: 28px;
-    filter: drop-shadow(0 0 18px rgba(245,197,24,0.6));
-    animation: pulse 3s ease-in-out infinite;
-  }
+/* ── Building (shared) ── */
+.building{position:absolute;bottom:28px;background:var(--bld);text-decoration:none;display:block;cursor:pointer;
+  transition:box-shadow .5s,filter .5s;z-index:5;border-top:1px solid rgba(120,120,160,.08)}
+.building .win{position:absolute;inset:12px 7px 8px 7px;transition:background .5s;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 14px,var(--bld) 14px,var(--bld) 18px),
+    repeating-linear-gradient(90deg,rgba(220,180,60,.04),rgba(220,180,60,.04) 8px,var(--bld) 8px,var(--bld) 14px)}
+.building:hover .win{
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 14px,var(--bld) 14px,var(--bld) 18px),
+    repeating-linear-gradient(90deg,rgba(245,197,24,.55),rgba(245,197,24,.55) 8px,var(--bld) 8px,var(--bld) 14px)}
+.building:hover{box-shadow:0 -120px 80px -60px rgba(245,197,24,.08),0 0 50px rgba(245,197,24,.12);filter:brightness(1.3)}
+.building::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:rgba(245,197,24,.06);transition:background .4s}
+.building:hover::before{background:rgba(245,197,24,.4)}
 
-  @keyframes pulse {
-    0%, 100% { filter: drop-shadow(0 0 14px rgba(245,197,24,0.5)); }
-    50% { filter: drop-shadow(0 0 28px rgba(245,197,24,0.9)); }
-  }
+/* ── Label ── */
+.building .lbl{position:absolute;top:-48px;left:50%;transform:translateX(-50%) translateY(8px);white-space:nowrap;text-align:center;
+  opacity:0;transition:all .4s ease;pointer-events:none;z-index:20}
+.building:hover .lbl{opacity:1;transform:translateX(-50%) translateY(0)}
+.lbl-name{display:block;font-size:15px;letter-spacing:4px;color:var(--gold);text-shadow:0 0 16px rgba(245,197,24,.45)}
+.lbl-sub{display:block;font-family:'Crimson Pro',serif;font-style:italic;font-size:10px;color:rgba(200,190,170,.55);letter-spacing:1px;margin-top:1px}
 
-  /* Profile photo */
-  .avatar-ring {
-    position: relative;
-    width: 104px;
-    height: 104px;
-    margin-bottom: 20px;
-  }
+/* ── Wayne Tower (Spotify) ── */
+.b-wayne{left:48%;transform:translateX(-50%);width:80px;height:clamp(260px,42vh,390px)}
+.b-wayne .spire{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:3px;height:50px;
+  background:linear-gradient(to top,var(--bld),rgba(100,100,140,.25))}
+.b-wayne .spire::after{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:7px;height:7px;
+  background:rgba(245,197,24,.35);border-radius:50%;box-shadow:0 0 10px rgba(245,197,24,.5);animation:sig-pulse 3s ease-in-out infinite}
+.b-wayne::after{content:'';position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:56px;height:14px;background:var(--bld);border-top:1px solid rgba(120,120,160,.08)}
 
-  .avatar-ring::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: conic-gradient(var(--gold), var(--gold-dim), transparent, var(--gold));
-    animation: spin 4s linear infinite;
-  }
+/* ── Archives (Letterboxd) ── */
+.b-archives{left:32%;width:68px;height:clamp(200px,32vh,295px)}
+.b-archives::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:30px;height:8px;background:var(--bld);border-radius:2px 2px 0 0}
 
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ── Tech Tower (GitHub) ── */
+.b-tech{left:63%;width:70px;height:clamp(220px,35vh,320px)}
+.b-tech::after{content:'';position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:6px;height:30px;
+  background:linear-gradient(to top,var(--bld),rgba(80,80,120,.2))}
 
-  .avatar-ring img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--black);
-  }
+/* ── Signal Tower (Discord) ── */
+.b-signal{left:17%;width:56px;height:clamp(170px,27vh,245px)}
+.b-signal::after{content:'';position:absolute;top:-24px;left:50%;transform:translateX(-50%);width:3px;height:24px;
+  background:linear-gradient(to top,var(--bld),rgba(88,101,242,.3))}
 
-  .avatar-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--panel);
-    border: 3px solid var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--gold);
-    letter-spacing: 2px;
-  }
+/* ── Broadcast (Twitter/X) ── */
+.b-broadcast{left:79%;width:72px;height:clamp(180px,28vh,265px)}
+.b-broadcast::after{content:'';position:absolute;top:-10px;left:20%;width:22px;height:10px;background:var(--bld);border-radius:1px 1px 0 0}
 
-  h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(32px, 8vw, 48px);
-    letter-spacing: 6px;
-    color: var(--gold);
-    text-shadow: 0 0 30px rgba(245,197,24,0.4);
-    text-align: center;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
+/* ── Deco Buildings ── */
+.deco{position:absolute;bottom:28px;background:var(--bld-deco);z-index:3}
+.deco .dw{position:absolute;inset:8px 5px 6px 5px;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 11px,var(--bld-deco) 11px,var(--bld-deco) 14px),
+    repeating-linear-gradient(90deg,rgba(180,150,60,.015),rgba(180,150,60,.015) 6px,var(--bld-deco) 6px,var(--bld-deco) 11px)}
 
-  .tagline {
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-align: center;
-    margin-bottom: 4px;
-  }
+/* ── Neon Signs ── */
+.neon{position:absolute;height:3px;border-radius:1px;left:50%;transform:translateX(-50%);animation:nflick 4s ease-in-out infinite}
+@keyframes nflick{0%,100%{opacity:.8}30%{opacity:.3}32%{opacity:.9}70%{opacity:.6}}
 
-  .bio {
-    font-size: 15px;
-    font-style: italic;
-    color: var(--text-dim);
-    text-align: center;
-    max-width: 320px;
-    line-height: 1.6;
-    margin-top: 10px;
-    margin-bottom: 36px;
-  }
+/* ── Fog ── */
+.fog{position:absolute;bottom:0;height:180px;width:250%;pointer-events:none;z-index:6;
+  background:linear-gradient(90deg,transparent 0%,rgba(130,150,170,.06) 15%,rgba(130,150,170,.09) 35%,transparent 55%,rgba(130,150,170,.07) 75%,transparent 100%)}
+.fog-1{animation:fdrift 28s linear infinite;bottom:10px;opacity:.9}
+.fog-2{animation:fdrift 40s linear infinite reverse;bottom:50px;opacity:.5;height:140px}
+.fog-3{animation:fdrift 55s linear infinite;bottom:90px;opacity:.3;height:100px}
+@keyframes fdrift{from{transform:translateX(-60%)}to{transform:translateX(0)}}
 
-  /* Divider */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    max-width: 360px;
-    margin-bottom: 28px;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  }
-  .divider span {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold-dim);
-  }
+/* ── Ground ── */
+.ground{position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(to bottom,#07070e,#030306);z-index:4}
 
-  /* Link buttons */
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-    max-width: 360px;
-  }
+/* ── Rain ── */
+.rain{position:fixed;inset:0;pointer-events:none;z-index:18;opacity:.3;
+  background-image:linear-gradient(to bottom,transparent 92%,rgba(190,200,210,.07) 100%);
+  background-size:1.5px 90px;animation:rfall .35s linear infinite}
+@keyframes rfall{from{transform:translateY(-90px)}to{transform:translateY(0)}}
 
-  .link-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 22px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--text);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 3px;
-    transition: all 0.25s ease;
-    overflow: hidden;
-    cursor: pointer;
-  }
+/* ── Bats ── */
+.fbat{position:absolute;z-index:15;pointer-events:none}
+.fbat svg{fill:rgba(15,15,30,.75);animation:bflap .25s ease-in-out infinite alternate}
+@keyframes bflap{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
 
-  .link-btn::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--gold);
-    transform: scaleY(0);
-    transition: transform 0.25s ease;
-    transform-origin: bottom;
-  }
+/* ── Hint ── */
+.hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:4px;
+  color:rgba(200,190,170,.25);z-index:25;white-space:nowrap;transition:opacity 1.5s;text-transform:uppercase}
 
-  .link-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(245,197,24,0.06), transparent);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
+/* ── Footer ── */
+.footer-q{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;
+  color:rgba(200,190,170,.15);z-index:25;white-space:nowrap;text-transform:uppercase}
 
-  .link-btn:hover {
-    border-color: rgba(245,197,24,0.5);
-    transform: translateX(4px);
-    box-shadow: -4px 0 20px rgba(245,197,24,0.15), 0 4px 20px rgba(0,0,0,0.5);
-    color: var(--gold);
-  }
+/* ── Batman Silhouette ── */
+.batman{position:absolute;bottom:28px;left:1%;z-index:4;opacity:.12;pointer-events:none}
 
-  .link-btn:hover::before { transform: scaleY(1); }
-  .link-btn:hover::after { opacity: 1; }
-
-  .link-btn .icon {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.8;
-    transition: opacity 0.25s;
-  }
-  .link-btn:hover .icon { opacity: 1; }
-
-  .link-btn .icon svg { width: 22px; height: 22px; fill: var(--gold); }
-
-  .link-label {
-    flex: 1;
-  }
-
-  .link-sub {
-    display: block;
-    font-family: 'Crimson Pro', serif;
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: var(--text-dim);
-    font-style: italic;
-    margin-top: 1px;
-    font-weight: 300;
-    text-transform: none;
-  }
-
-  .arrow {
-    margin-left: auto;
-    opacity: 0.3;
-    font-size: 20px;
-    transition: opacity 0.25s, transform 0.25s;
-  }
-  .link-btn:hover .arrow { opacity: 0.8; transform: translateX(3px); }
-
-  /* Footer */
-  footer {
-    margin-top: 52px;
-    text-align: center;
-  }
-
-  .bat-small {
-    width: 30px;
-    opacity: 0.2;
-    margin: 0 auto 8px;
-    display: block;
-    filter: drop-shadow(0 0 6px rgba(245,197,24,0.3));
-  }
-
-  footer p {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    opacity: 0.4;
-  }
-
-  /* Entry animations */
-  .animate {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease forwards;
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .bat-logo { animation-delay: 0s; }
-  .avatar-ring { animation: fadeUp 0.6s 0.1s ease forwards; opacity: 0; }
-  h1 { animation: fadeUp 0.6s 0.2s ease forwards; opacity: 0; }
-  .tagline { animation: fadeUp 0.6s 0.3s ease forwards; opacity: 0; }
-  .bio { animation: fadeUp 0.6s 0.35s ease forwards; opacity: 0; }
-  .divider { animation: fadeUp 0.6s 0.4s ease forwards; opacity: 0; }
-  .link-btn:nth-child(1) { animation: fadeUp 0.5s 0.45s ease forwards; opacity: 0; }
-  .link-btn:nth-child(2) { animation: fadeUp 0.5s 0.55s ease forwards; opacity: 0; }
-  .link-btn:nth-child(3) { animation: fadeUp 0.5s 0.65s ease forwards; opacity: 0; }
-  .link-btn:nth-child(4) { animation: fadeUp 0.5s 0.75s ease forwards; opacity: 0; }
-  footer { animation: fadeUp 0.6s 0.9s ease forwards; opacity: 0; }
+/* ── Responsive ── */
+@media(max-width:768px){
+  .profile{top:24%}
+  .bat-signal{width:90px;height:90px;top:6%}
+  .bat-signal svg{width:45px}
+  .moon{width:35px;height:35px;top:5%;right:8%}
+  .building .lbl{opacity:.75;transform:translateX(-50%) translateY(0);font-size:12px}
+  .lbl-name{font-size:11px;letter-spacing:2px}
+  .lbl-sub{font-size:8px}
+  .b-wayne{width:55px}.b-archives{width:48px}.b-tech{width:50px}.b-signal{width:40px}.b-broadcast{width:50px}
+  .deco{display:none}
+  .hint{display:none}
+  .batman{display:none}
+}
+@media(max-width:480px){
+  .b-wayne{left:45%}.b-archives{left:25%}.b-tech{left:60%}.b-signal{left:8%}.b-broadcast{left:78%}
+}
 </style>
 </head>
 <body>
-<div class="wrapper">
 
-  <!-- Batman SVG Logo -->
-  <svg class="bat-logo animate" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#f5c518" d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/>
+<!-- Stars -->
+<div id="sc"></div>
+
+<!-- Moon -->
+<div class="moon"></div>
+
+<!-- Bat Signal -->
+<div class="bat-signal">
+  <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/>
   </svg>
+</div>
 
-  <!-- Profile photo -->
-  <div class="avatar-ring">
-    <img src="https://i.ibb.co/TMsyfkfK/Gemini-Generated-Image-77z43w77z43w77z4-1.png" alt="Kishan Mishra" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-    <div class="avatar-placeholder" style="display:none;">KM</div>
-  </div>
+<!-- Profile -->
+<div class="profile">
+  <h1>KISHAN MISHRA</h1>
+  <p class="tag">GOTHAM CITIZEN</p>
+  <p class="bio">Vibe coder · Gamer · Music &amp; Cinema · Poetry &amp; Shayari · History &amp; International Relations</p>
+</div>
 
-  <h1>Kishan Mishra</h1>
-  <p class="tagline">Gotham Citizen</p>
-  <p class="bio">Vibe coder · Gamer · Music & Cinema · Poetry & Shayari · History & International Relations</p>
+<!-- Skyline -->
+<div class="skyline">
 
-  <div class="divider"><span>Find Me On</span></div>
+  <!-- Decorative Buildings -->
+  <div class="deco" style="left:2%;width:42px;height:170px"><div class="dw"></div></div>
+  <div class="deco" style="left:7%;width:52px;height:215px"><div class="dw"></div><div class="neon" style="width:16px;bottom:55px;background:#ff3366;box-shadow:0 0 8px #ff3366"></div></div>
+  <div class="deco" style="left:13%;width:32px;height:155px"><div class="dw"></div></div>
+  <div class="deco" style="left:24%;width:40px;height:195px"><div class="dw"></div></div>
+  <div class="deco" style="left:29%;width:28px;height:140px"><div class="dw"></div></div>
+  <div class="deco" style="left:39%;width:48px;height:225px"><div class="dw"></div><div class="neon" style="width:20px;bottom:70px;background:#4488ff;box-shadow:0 0 8px #4488ff;animation-delay:1.5s"></div></div>
+  <div class="deco" style="left:44%;width:33px;height:185px"><div class="dw"></div></div>
+  <div class="deco" style="left:55%;width:42px;height:205px"><div class="dw"></div></div>
+  <div class="deco" style="left:60%;width:30px;height:160px"><div class="dw"></div></div>
+  <div class="deco" style="left:71%;width:48px;height:235px"><div class="dw"></div><div class="neon" style="width:14px;bottom:45px;background:#aa44ff;box-shadow:0 0 8px #aa44ff;animation-delay:2.8s"></div></div>
+  <div class="deco" style="left:76%;width:35px;height:175px"><div class="dw"></div></div>
+  <div class="deco" style="left:86%;width:50px;height:210px"><div class="dw"></div></div>
+  <div class="deco" style="left:92%;width:44px;height:190px"><div class="dw"></div></div>
+  <div class="deco" style="left:97%;width:38px;height:165px"><div class="dw"></div></div>
 
-  <div class="links">
+  <!-- Batman Silhouette (Easter Egg) -->
+  <svg class="batman" width="40" height="70" viewBox="0 0 40 70"><path fill="#0a0a14" d="M20,0 C18,0 16,2 15,5 L13,4 L14,8 C12,12 11,16 11,20 L11,42 C8,44 5,47 5,50 L5,55 C5,58 3,62 0,65 L0,70 L15,70 L15,60 C15,58 17,56 20,56 C23,56 25,58 25,60 L25,70 L40,70 L40,65 C37,62 35,58 35,55 L35,50 C35,47 32,44 29,42 L29,20 C29,16 28,12 26,8 L27,4 L25,5 C24,2 22,0 20,0 Z"/></svg>
 
-    <!-- Spotify -->
-    <a class="link-btn" href="https://open.spotify.com/user/31pwig3d7sq7i6fi5hl62uhj3xve?si=blnW1mQdQeeVnBsEPJ-AWQ&pi=vyG0zePOQCits" target="_blank">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-        </svg>
-      </span>
-      <span class="link-label">
-        Spotify
-        <span class="link-sub">Music is the Bat-Signal of the soul</span>
-      </span>
-      <span class="arrow">›</span>
-    </a>
+  <!-- Interactive Buildings -->
+  <a class="building b-signal" href="https://discord.com/users/758565587357794335" target="_blank" aria-label="Discord">
+    <div class="win"></div>
+    <div class="lbl"><span class="lbl-name">SIGNAL TOWER</span><span class="lbl-sub">Discord · Join the Batcave</span></div>
+  </a>
 
-    <!-- Letterboxd -->
-    <a class="link-btn" href="https://boxd.it/jvNsR" target="_blank">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6.414 21C4.187 21 3 19.983 3 18.17V5.83C3 4.016 4.187 3 6.414 3h.436c1.937 0 2.87.744 3.412 2.057L12 8.68l1.738-3.623C14.28 3.744 15.212 3 17.15 3h.436C19.813 3 21 4.016 21 5.83v12.34C21 19.983 19.813 21 17.586 21h-.436c-1.938 0-2.87-.744-3.412-2.057L12 15.32l-1.738 3.623C9.72 20.256 8.788 21 6.85 21z"/>
-        </svg>
-      </span>
-      <span class="link-label">
-        Letterboxd
-        <span class="link-sub">Film logs from the dark knight</span>
-      </span>
-      <span class="arrow">›</span>
-    </a>
+  <a class="building b-archives" href="https://boxd.it/jvNsR" target="_blank" aria-label="Letterboxd">
+    <div class="win"></div>
+    <div class="lbl"><span class="lbl-name">GOTHAM ARCHIVES</span><span class="lbl-sub">Letterboxd · Film logs</span></div>
+  </a>
 
-    <!-- GitHub -->
-    <a class="link-btn" href="https://github.com/kishankool/" target="_blank">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-        </svg>
-      </span>
-      <span class="link-label">
-        GitHub
-        <span class="link-sub">Code from the Batcave</span>
-      </span>
-      <span class="arrow">›</span>
-    </a>
+  <a class="building b-wayne" href="https://open.spotify.com/user/31pwig3d7sq7i6fi5hl62uhj3xve?si=blnW1mQdQeeVnBsEPJ-AWQ&pi=vyG0zePOQCits" target="_blank" aria-label="Spotify">
+    <div class="spire"></div>
+    <div class="win"></div>
+    <div class="lbl"><span class="lbl-name">WAYNE TOWER</span><span class="lbl-sub">Spotify · Vibes &amp; Anthems</span></div>
+  </a>
 
-    <!-- Discord -->
-    <a class="link-btn" href="https://discord.com/users/758565587357794335" target="_blank">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
-        </svg>
-      </span>
-      <span class="link-label">
-        Discord
-        <span class="link-sub">Join the Batcave server</span>
-      </span>
-      <span class="arrow">›</span>
-    </a>
+  <a class="building b-tech" href="https://github.com/kishankool/" target="_blank" aria-label="GitHub">
+    <div class="win"></div>
+    <div class="lbl"><span class="lbl-name">TECH TOWER</span><span class="lbl-sub">GitHub · Code from the Batcave</span></div>
+  </a>
 
-    <!-- Twitter / X -->
-    <a class="link-btn" href="https://x.com/kishanmishra389" target="_blank">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-      </span>
-      <span class="link-label">
-        Twitter / X
-        <span class="link-sub">Thoughts from Gotham's rooftops</span>
-      </span>
-      <span class="arrow">›</span>
-    </a>
-
-  </div>
-
-  <footer>
-    <svg class="bat-small" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#f5c518" d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/>
-    </svg>
-    <p>I am vengeance. I am the night.</p>
-  </footer>
+  <a class="building b-broadcast" href="https://x.com/kishanmishra389" target="_blank" aria-label="Twitter / X">
+    <div class="win"></div>
+    <div class="lbl"><span class="lbl-name">GCPD BROADCAST</span><span class="lbl-sub">Twitter · Gotham's rooftops</span></div>
+  </a>
 
 </div>
+
+<!-- Fog -->
+<div class="fog fog-1"></div>
+<div class="fog fog-2"></div>
+<div class="fog fog-3"></div>
+
+<!-- Ground -->
+<div class="ground"></div>
+
+<!-- Rain -->
+<div class="rain"></div>
+
+<!-- Bats Container -->
+<div id="bc"></div>
+
+<!-- Hint -->
+<div class="hint" id="hint">Hover the buildings to explore</div>
+
+<!-- Footer -->
+<p class="footer-q">I am vengeance. I am the night.</p>
+
+<script>
+// ── Stars ──
+const sc=document.getElementById('sc');
+for(let i=0;i<180;i++){const s=document.createElement('div');s.className='star';
+const sz=Math.random()*1.8+.4;
+s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*55}%;width:${sz}px;height:${sz}px;--o:${Math.random()*.4+.1};--d:${Math.random()*4+2}s;--del:${Math.random()*4}s`;
+sc.appendChild(s)}
+
+// ── Flying Bats ──
+const bc=document.getElementById('bc');
+const batSVG='<svg viewBox="0 0 200 100"><path d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/></svg>';
+function spawnBat(){
+  const b=document.createElement('div');b.className='fbat';
+  const sz=Math.random()*14+8,y=Math.random()*35+5,dur=Math.random()*7+5,left=Math.random()>.5;
+  b.innerHTML=`<svg width="${sz}" height="${sz/2}" viewBox="0 0 200 100"><path d="M100,15 C85,15 72,28 60,35 C48,42 30,38 10,48 C20,50 30,50 38,46 C30,55 25,65 28,78 C35,68 44,60 55,58 C62,72 75,82 100,85 C125,82 138,72 145,58 C156,60 165,68 172,78 C175,65 170,55 162,46 C170,50 180,50 190,48 C170,38 152,42 140,35 C128,28 115,15 100,15 Z"/></svg>`;
+  b.style.top=y+'%';
+  if(left){b.style.left='-30px';b.style.transition=`left ${dur}s linear,top ${dur}s ease-in-out`;
+    bc.appendChild(b);requestAnimationFrame(()=>{b.style.left='calc(100% + 30px)';b.style.top=(y+Math.random()*16-8)+'%'})
+  }else{b.style.right='-30px';b.style.transition=`right ${dur}s linear,top ${dur}s ease-in-out`;b.style.transform='scaleX(-1)';
+    bc.appendChild(b);requestAnimationFrame(()=>{b.style.right='calc(100% + 30px)';b.style.top=(y+Math.random()*16-8)+'%'})}
+  setTimeout(()=>b.remove(),(dur+.5)*1000)
+}
+setInterval(spawnBat,4000);setTimeout(spawnBat,600);setTimeout(spawnBat,2000);setTimeout(spawnBat,3200);
+
+// ── Hint auto-hide ──
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0'},4000);
+</script>
 </body>
 </html>
