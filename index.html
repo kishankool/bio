@@ -167,7 +167,7 @@ body{background:#020206;position:relative}
 
 <!-- Video Background -->
 <div class="bg-video">
-  <video autoplay muted loop playsinline preload="auto">
+  <video id="bg-vid" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture>
     <source src="bg.mp4" type="video/mp4">
   </video>
 </div>
@@ -289,6 +289,16 @@ setInterval(spawnBat,4000);setTimeout(spawnBat,600);setTimeout(spawnBat,2000);se
 
 // ── Hint auto-hide ──
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0'},4000);
+
+// ── Force video play on mobile ──
+const vid=document.getElementById('bg-vid');
+function tryPlay(){if(vid&&vid.paused){vid.muted=true;vid.play().catch(()=>{});}}
+tryPlay();
+document.addEventListener('touchstart',tryPlay,{once:true});
+document.addEventListener('scroll',tryPlay,{once:true});
+document.addEventListener('click',tryPlay,{once:true});
+setTimeout(tryPlay,500);
+setTimeout(tryPlay,2000);
 </script>
 </body>
 </html>
