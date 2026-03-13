@@ -14,7 +14,12 @@
   --sky1:#020206;--sky2:#080814;--sky3:#101024;
 }
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Bebas Neue',sans-serif}
-body{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 45%,var(--sky3) 80%,#161630 100%);position:relative}
+body{background:#020206;position:relative}
+
+/* ── Video Background ── */
+.bg-video{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg-video video{width:100%;height:100%;object-fit:cover;opacity:.45}
+.bg-video::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,2,6,.6) 0%,rgba(8,8,20,.4) 40%,rgba(8,8,20,.5) 70%,rgba(2,2,6,.7) 100%);pointer-events:none}
 
 /* ── Stars ── */
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite;animation-delay:var(--del,0s)}
@@ -159,6 +164,13 @@ body{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 45%,var(--sky3
 </style>
 </head>
 <body>
+
+<!-- Video Background -->
+<div class="bg-video">
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="bg.mp4" type="video/mp4">
+  </video>
+</div>
 
 <!-- Stars -->
 <div id="sc"></div>
