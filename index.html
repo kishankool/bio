@@ -73,8 +73,10 @@ body{background:#020206;position:relative}
 .profile{position:absolute;top:30%;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none;width:90%}
 .profile h1{font-size:clamp(30px,6vw,56px);letter-spacing:8px;color:var(--gold);text-shadow:0 0 40px rgba(245,197,24,.35);line-height:1;margin-bottom:6px}
 .profile .tag{font-size:clamp(10px,1.5vw,13px);letter-spacing:5px;color:rgba(245,197,24,.75);transition:color .4s}
-.profile .bio{font-family:'Crimson Pro',serif;font-style:italic;font-size:clamp(12px,1.4vw,15px);color:rgba(220,210,195,.7);margin-top:10px;letter-spacing:1px;transition:color .4s;pointer-events:auto;cursor:default}
+.profile .interests-label{font-size:clamp(9px,1.2vw,11px);letter-spacing:6px;color:rgba(245,197,24,.45);margin-top:16px;margin-bottom:4px;text-transform:uppercase}
+.profile .bio{font-family:'Crimson Pro',serif;font-style:italic;font-size:clamp(12px,1.4vw,15px);color:rgba(220,210,195,.7);margin-top:4px;letter-spacing:1px;transition:color .4s;pointer-events:auto;cursor:default}
 .profile:hover .tag{color:rgba(245,197,24,1)}
+.profile:hover .interests-label{color:rgba(245,197,24,.7)}
 .profile:hover .bio{color:rgba(255,255,255,.95)}
 
 /* ── Skyline Container ── */
@@ -97,9 +99,9 @@ body{background:#020206;position:relative}
 
 /* ── Building Logo ── */
 .bld-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;pointer-events:none;
-  opacity:.2;transition:opacity .5s,filter .5s,transform .5s}
+  opacity:.55;transition:opacity .5s,filter .5s,transform .5s;filter:drop-shadow(0 0 6px rgba(245,197,24,.2))}
 .bld-logo svg{display:block}
-.building:hover .bld-logo{opacity:.85;filter:drop-shadow(0 0 10px rgba(245,197,24,.4));transform:translate(-50%,-50%) scale(1.1)}
+.building:hover .bld-logo{opacity:1;filter:drop-shadow(0 0 14px rgba(245,197,24,.6));transform:translate(-50%,-50%) scale(1.15)}
 
 /* ── Label ── */
 .building .lbl{position:absolute;top:-48px;left:50%;transform:translateX(-50%) translateY(8px);white-space:nowrap;text-align:center;
@@ -111,12 +113,19 @@ body{background:#020206;position:relative}
 .building:hover .lbl-sub{color:rgba(255,255,255,.95)}
 
 /* ── Wayne Tower (Spotify) ── */
-.b-wayne{left:48%;transform:translateX(-50%);width:80px;height:clamp(260px,42vh,390px)}
+.b-wayne{left:48%;transform:translateX(-50%);width:80px;height:clamp(260px,42vh,390px);
+  box-shadow:0 -60px 60px -30px rgba(245,197,24,.04),0 0 30px rgba(245,197,24,.03);
+  border-left:1px solid rgba(245,197,24,.06);border-right:1px solid rgba(245,197,24,.06)}
 .b-wayne .spire{position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:3px;height:50px;
-  background:linear-gradient(to top,var(--bld),rgba(100,100,140,.25))}
-.b-wayne .spire::after{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:7px;height:7px;
-  background:rgba(245,197,24,.35);border-radius:50%;box-shadow:0 0 10px rgba(245,197,24,.5);animation:sig-pulse 3s ease-in-out infinite}
-.b-wayne::after{content:'';position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:56px;height:14px;background:var(--bld);border-top:1px solid rgba(120,120,160,.08)}
+  background:linear-gradient(to top,var(--bld),rgba(245,197,24,.15))}
+.b-wayne .spire::after{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:8px;height:8px;
+  background:rgba(245,197,24,.5);border-radius:50%;box-shadow:0 0 14px rgba(245,197,24,.7),0 0 30px rgba(245,197,24,.3);animation:sig-pulse 3s ease-in-out infinite}
+.b-wayne::after{content:'';position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:56px;height:14px;background:var(--bld);border-top:1px solid rgba(245,197,24,.12)}
+/* Wayne Tower flanges */
+.b-wayne::before{content:'';position:absolute;bottom:40%;left:-8px;width:8px;height:60%;background:var(--bld);
+  border-left:1px solid rgba(245,197,24,.04);clip-path:polygon(100% 0%,100% 100%,0% 100%)}
+.b-wayne .win::after{content:'';position:absolute;bottom:0;right:-8px;width:8px;height:60%;
+  background:var(--bld);border-right:1px solid rgba(245,197,24,.04);clip-path:polygon(0% 0%,0% 100%,100% 100%)}
 
 /* ── Archives (Letterboxd) ── */
 .b-archives{left:32%;width:68px;height:clamp(200px,32vh,295px)}
@@ -200,7 +209,7 @@ body{background:#020206;position:relative}
   .building .lbl{opacity:.75;transform:translateX(-50%) translateY(0);font-size:12px}
   .lbl-name{font-size:11px;letter-spacing:2px}
   .lbl-sub{font-size:8px}
-  .b-wayne{width:55px}.b-archives{width:48px}.b-tech{width:50px}.b-signal{width:40px}.b-broadcast{width:50px}
+  .b-wayne{width:55px}.b-archives{width:48px;z-index:7}.b-tech{width:50px}.b-signal{width:40px}.b-broadcast{width:50px}
   .bld-logo svg{transform:scale(.7)}
   .deco{display:none}
   .hint{display:none}
@@ -210,7 +219,7 @@ body{background:#020206;position:relative}
   .gate-btn{padding:12px 24px;font-size:13px;letter-spacing:3px}
 }
 @media(max-width:480px){
-  .b-wayne{left:45%}.b-archives{left:25%}.b-tech{left:60%}.b-signal{left:8%}.b-broadcast{left:78%}
+  .b-wayne{left:50%}.b-archives{left:18%;z-index:7}.b-tech{left:68%}.b-signal{left:3%}.b-broadcast{left:84%}
   .bld-logo svg{transform:scale(.55)}
 }
 </style>
@@ -260,6 +269,7 @@ body{background:#020206;position:relative}
 <div class="profile">
   <h1>KISHAN MISHRA</h1>
   <p class="tag">GOTHAM CITIZEN</p>
+  <p class="interests-label">— I N T E R E S T S —</p>
   <p class="bio">Vibe coding · Gaming · Music &amp; Cinema · Poetry &amp; Shayari · History &amp; Philosophy</p>
 </div>
 
